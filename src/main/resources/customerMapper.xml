@@ -1,0 +1,19 @@
+<!-- customerMapper.xml -->
+
+<select id="searchCustomers" parameterType="SearchCriteria" resultType="Customer">
+    SELECT *
+    FROM CUSTOMER
+    WHERE 1=1
+    <if test="customerId != null">
+        AND CUSTOMER_ID = #{customerID}
+    </if>
+    <if test="firstName != null and firstName != ''">
+        AND FIRST_NAME LIKE '%' || #{firstName} || '%'
+    </if>
+    <if test="lastName != null and lastName != ''">
+        AND LAST_NAME LIKE '%' || #{lastName} || '%'
+    </if>
+    <if test="email != null and email != ''">
+        AND EMAIL LIKE '%' || #{email} || '%'
+    </if>
+</select>
