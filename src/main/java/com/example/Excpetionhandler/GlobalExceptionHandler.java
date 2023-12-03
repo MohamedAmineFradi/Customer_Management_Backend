@@ -1,7 +1,10 @@
-package com.example.handler;
+package com.example.Excpetionhandler;
 
 
+import com.example.model.ErrorConfig;
+import com.example.model.ErrorResponse;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,33 +13,40 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @Autowired
+    private  ErrorConfig errorConfig ;
+
+
     @ExceptionHandler(IllegalStateException.class)
-    public ResponseEntity<?> handleException(IllegalStateException exception){
-        return ResponseEntity
-                .badRequest()
-                .body(exception.getMessage());
+    public ResponseEntity<?> handleIllegalStateException(){
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setCode(errorConfig.getEr01Code());
+        errorResponse.setMessage(errorConfig.getEr01msg());
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR) ;
     }
 
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<?> handleException(){
-        return ResponseEntity
-                .notFound()
-                .build();
+    public ResponseEntity<?> handleEntityNotFoundException(){
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setCode(errorConfig.getEr02Code());
+        errorResponse.setMessage(errorConfig.getEr02msg());
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.ACCEPTED) ;
     }
 
 
 
     @ExceptionHandler(StackOverflowError.class)
-    public ResponseEntity<?> handleException(StackOverflowError error){
-        return ResponseEntity.badRequest().body("il y a un boucle infinie ");
+    public ResponseEntity<?> handleStackOverflowErro(){
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setCode(errorConfig.getEr03Code());
+        errorResponse.setMessage(errorConfig.getEr03msg());
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR) ;
     }
 
-
-    @ExceptionHandler(value = RuntimeException.class)
-    public ResponseEntity<Object> exception(RuntimeException exception) {
-        return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
-    }
 
 
 }

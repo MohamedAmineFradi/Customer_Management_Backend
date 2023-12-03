@@ -1,0 +1,17 @@
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <!-- Define type aliases here -->
+    <typeAliases>
+        <typeAlias type="com.example.model.SearchCriteria" alias="SearchCriteria" />
+        <typeAlias type="com.example.model.Customer" alias="Customer" />
+
+        <!-- Add other type aliases if needed -->
+    </typeAliases>
+
+    <!-- Your other MyBatis settings and configurations go here -->
+
+</configuration>

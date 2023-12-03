@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.example.model;
 
 import jakarta.persistence.*;
 
@@ -9,13 +9,13 @@ import jakarta.persistence.*;
 public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "CUSTOMER_ID")
+    @Column(name = "CUSTOMERID")
     private Integer customerId;
     @Basic
-    @Column(name = "FIRST_NAME")
+    @Column(name = "FIRSTNAME")
     private String firstName;
     @Basic
-    @Column(name = "LAST_NAME")
+    @Column(name = "LASTNAME")
     private String lastName;
     @Basic
     @Column(name = "EMAIL")

@@ -1,5 +1,9 @@
-package com.example.DAO.db1;
+package com.example.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class SearchCriteria {
     private Integer customerId;
     private String firstName;
@@ -16,11 +20,12 @@ public class SearchCriteria {
                 '}';
     }
 
-    public Integer getCustomerID() {
+    @Id
+    public Integer getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerID(Integer customerId) {
+    public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
 
